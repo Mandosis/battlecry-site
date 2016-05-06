@@ -1,0 +1,14 @@
+doctype HTML
+html(ng-app="battlecryApp")
+  head
+    title Battlecry Stats
+    script(src="vendor/angular/angular.min.js")
+    script(src="vendor/angular-route/angular-route.min.js")
+    script(src="vendor/angular-loading-bar/build/loading-bar.min.js")
+    script(src="assets/js/client.min.js")
+    link(rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="vendor/angular-loading-bar/build/loading-bar.min.css")
+    link(rel="stylesheet" href="assets/css/style.min.css")
+  body
+    main(class="container-fluid" ng-controller="MainController as main")
+      h1 {{main.message}}
