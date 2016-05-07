@@ -52,12 +52,14 @@ app.controller('ErrorController', ['cfpLoadingBar', '$timeout', function(cfpLoad
 *******************************************************************************/
 app.controller('ProfileController', ['$http', 'cfpLoadingBar', '$timeout', 'ProfileService', '$routeParams', function($http, cfpLoadingBar, $timeout, ProfileService, $routeParams) {
   var vm = this;
-  vm.results = ProfileService.data;
+  vm.data = ProfileService.data;
   this.message = 'Hello world';
 
   // Get profile info
   ProfileService.profile($routeParams.username);
 
+  // Get stats info
+  ProfileService.stats($routeParams.username);
 
   vm.startLoad = function() {
     cfpLoadingBar.start();
@@ -66,7 +68,6 @@ app.controller('ProfileController', ['$http', 'cfpLoadingBar', '$timeout', 'Prof
   vm.completeLoad = function() {
     cfpLoadingBar.complete();
   }
-
 
   // fake the initial load so first time users can see the bar right away:
   vm.startLoad();

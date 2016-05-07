@@ -1,2 +1,34 @@
-h1 {{profile.results.account.data.username}}
-p {{profile.message}}
+h1 {{profile.data.account.username}}
+p {{profile.data.account.joined}}
+
+// Overall Stats
+h2 Overall
+p Rank: {{profile.data.stats.overall.rank}}
+p Kills: {{profile.data.stats.overall.kills}}
+p Deaths: {{profile.data.stats.overall.deaths}}
+p Won: {{profile.data.stats.overall.won}}
+p Lost: {{profile.data.stats.overall.lost}}
+p Games Played: {{profile.data.stats.overall.gamesPlayed}}
+
+// Conquest stats
+h2 Conquest
+p Kills: {{profile.data.stats.conquest.kills}}
+p Deaths: {{profile.data.stats.conquest.deaths}}
+p Won: {{profile.data.stats.conquest.won}}
+p Lost: {{profile.data.stats.conquest.lost}}
+p CP Captures: {{profile.data.stats.conquest.captures}}
+p Games Played: {{profile.data.stats.conquest.gamesPlayed}}
+
+// Team Death Match stats
+h2 Team Death Match
+p Kills: {{profile.data.stats.teamDeathMatch.kills}}
+p Deaths: {{profile.data.stats.teamDeathMatch.deaths}}
+p Won: {{profile.data.stats.teamDeathMatch.won}}
+p Lost: {{profile.data.stats.teamDeathMatch.lost}}
+p Games Played: {{profile.data.stats.teamDeathMatch.gamesPlayed}}
+
+// Free for All stats
+h2 Free for All
+p Kills: {{profile.data.stats.freeForAll.kills}}
+p Deaths: {{profile.data.stats.freeForAll.deaths}}
+p Games Played: {{profile.data.stats.freeForAll.gamesPlayed}}
