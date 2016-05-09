@@ -69,9 +69,14 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 // Check if user is authorized
 router.get('/auth', function(req, res) {
   if(req.isAuthenticated()) {
+    var user = {
+      username: req.user.username,
+      picture: req.user.picture,
+      joined: req.user.joined
+    }
     res.status(200).json({
       success: true,
-      user: req.user
+      user: user
     });
   } else {
     res.status(200).json({
@@ -82,6 +87,7 @@ router.get('/auth', function(req, res) {
 
 // Logout
 router.get('/logout', function(req, res) {
+  req.session.destroy();
   req.logout();
   console.log('Logout route hit');
   res.status(200).json({

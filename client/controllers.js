@@ -141,17 +141,15 @@ app.controller('LogoutController', ['HeadService', 'cfpLoadingBar', '$timeout', 
 
   // Check if user is logged in
   UserService.isAuthenticated(function() {
-    
+
   });
-
-  // Redirect back to the homepage
-  $location.path('/');
-
 
   // Logout the user
   UserService.logout(function() {
     UserService.isAuthenticated(function(status, user) {
       console.log(status);
+      // Redirect back to the homepage
+      $location.path('/');
     });
 
   });
