@@ -1,7 +1,7 @@
 doctype HTML
 html(ng-app="battlecryApp")
-  head
-    title Galaxy Divided
+  head(ng-controller="HeadController as head")
+    title {{head.tags.title}}
     base(href="/")
     script(src="vendor/angular/angular.min.js")
     script(src="vendor/angular-route/angular-route.min.js")
@@ -12,25 +12,28 @@ html(ng-app="battlecryApp")
     link(rel="stylesheet" href="assets/css/style.min.css")
   body(ng-controller="AppController as app")
     nav(class="navbar navbar-default")
-      div(class="container-fluid")
-        div.navbar-header
-          button(class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-            span.sr-only Toggle Animation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-      // Logo
-      a(class="navbar-brand" href="/") Logo
-      
-      // Navigation Links
-      ul(class="nav navbar-nav")
-        li
-          a(href="/") Home
-        li
-          a(href="/community") Community
-        li
-          a(href="/about") About
-      
+      div.container-fluid
+        // Logo
+        a(class="navbar-brand" href="/") Battlecry
+        
+        // Navigation Links
+        ul(class="nav navbar-nav")
+          li
+            a(href="/") Home
+          li
+            a(href="/community") Community
+          li
+            a(href="/about") About
+            
+        ul(class="nav navbar-nav navbar-right")
+          li(ng-if="!app.user.data.username")
+            a(href="/login") Login
+          li(ng-if="app.user.data.username")
+            a(href="/player/{{app.user.data.username}}") {{app.user.data.username}}
+          li(ng-if="app.user.data.username")
+            a(href="/logout") Logout
+                
     // Appliction view
     main(class="container-fluid")
+      {{app.user}}
       section(ng-view)

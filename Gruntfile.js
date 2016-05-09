@@ -40,6 +40,7 @@ module.exports = function(grunt) {
                    "angular/angular-csp.css",
                    "angular-route/angular-route.min.js",
                    "angular-route/angular-route.min.js.map",
+                   "angular-ui-router/release/angular-ui-router.min.js",
                    "angular-loading-bar/build/loading-bar.min.js",
                    "angular-loading-bar/build/loading-bar.min.css",
                    "jquery/dist/jquery.min.js",
