@@ -2,19 +2,39 @@ var router = require('express').Router();
 var path = require('path');
 var passport = require('passport');
 var request = require('request');
+var config = require('../../modules/config');
 
-// Homepage
+/*******************************************************************************
+                                    Home
+*******************************************************************************/
 router.get('/home', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/home.jade'));
 });
 
-// Login
+/*******************************************************************************
+                                  Login
+*******************************************************************************/
 router.get('/login', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/login.jade'));
 });
+/*******************************************************************************
+                                  Profile
+*******************************************************************************/
+router.get('/profile', function(req, res) {
+  // Check if user is authenticated
+  if (req.isAuthenticated()) {
+    res.render(path.join(__dirname, '../public/views/partials/profile.jade'), req.user);
+  } else {
+    res.render(path.join(__dirname, '../public/views/partials/404.jade'));
+  }
+});
 
-// Profile
-router.get('/profile/:username', function(req, res) {
+
+
+/*******************************************************************************
+                                  Player
+*******************************************************************************/
+router.get('/player/:username', function(req, res) {
 
   // Object to store user information
   var user =  {
@@ -33,15 +53,18 @@ router.get('/profile/:username', function(req, res) {
       user.authorized = true;
     }
   }
-  res.render(path.join(__dirname, '../public/views/partials/profile.jade'), user);
+  res.render(path.join(__dirname, '../public/views/partials/player.jade'), user);
 });
-
-// Community
+/*******************************************************************************
+                                Community
+*******************************************************************************/
 router.get('/community', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/community.jade'))
-})
+});
 
-// 404 error page
+/*******************************************************************************
+                                  404
+*******************************************************************************/
 router.get('/404', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/404.jade'));
 });

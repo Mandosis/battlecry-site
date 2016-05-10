@@ -12,11 +12,17 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/player/:username', {
       templateUrl: function(params) {
-        return '/app/view/profile/' + params.username;
+        return '/app/view/player/' + params.username;
       },
+      controller: 'PlayerController',
+      controllerAs: 'player'
+    })
+    .when('/profile', {
+      templateUrl: '/app/view/profile',
       controller: 'ProfileController',
       controllerAs: 'profile'
     })
+
     .when('/login', {
       templateUrl: '/app/view/login',
       controller: 'LoginController',

@@ -1,9 +1,8 @@
 h1 {{profile.data.account.username}}
 p {{profile.data.account.joined}}
 
-p #{username}
-if authorized
-  button authorized
+a(href="/profile/edit")
+  button(class="btn btn-default") Edit Profile
 
 // Overall Stats
 h2 Overall
