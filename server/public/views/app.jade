@@ -25,15 +25,16 @@ html(ng-app="battlecryApp")
           li
             a(href="/about") About
             
-        ul(class="nav navbar-nav navbar-right")
-          li(ng-if="!app.user.data.username")
-            a(href="/login") Login
-          li(ng-if="app.user.data.username")
+        a(href="/login" class="pull-right" ng-if="!app.user.data.username")
+          button(class="btn btn-default navbar-btn") Sign in
+          
+        ul(class="nav navbar-nav navbar-right" ng-if="app.user.data.username")
+          li
             a(href="/player/{{app.user.data.username}}") {{app.user.data.username}}
-          li(ng-if="app.user.data.username")
+          li
             a(href="/logout") Logout
                 
     // Appliction view
     main(class="container-fluid")
-      {{app.user}}
+      p {{app.user}}
       section(ng-view)

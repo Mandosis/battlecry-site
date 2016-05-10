@@ -14,6 +14,24 @@ app.factory('HeadService', function() {
   }
 })
 
+/*******************************************************************************
+                                  Partials
+*******************************************************************************/
+var partials = {};
+
+app.factory('TemplateService', ['$http', function($http) {
+  var profile = function(params) {
+    console.log(params);
+    $http.get('/app/partials/profile').then(function(response) {
+      partials.profile = response.data;
+    });
+  }
+
+  return {
+    partials: partials,
+    profile: profile
+  }
+}]);
 
 /*******************************************************************************
                                   Profile

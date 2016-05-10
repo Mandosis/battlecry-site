@@ -1,6 +1,10 @@
 h1 {{profile.data.account.username}}
 p {{profile.data.account.joined}}
 
+p #{username}
+if authorized
+  button authorized
+
 // Overall Stats
 h2 Overall
 p Rank: {{profile.data.stats.overall.rank}}
