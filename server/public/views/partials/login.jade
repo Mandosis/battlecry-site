@@ -1,10 +1,11 @@
 h1 Sign in
-p {{login.error}}
+div(class="alert alert-danger" ng-if="login.error")
+  p {{login.error}}
 form
   div.form-group
     label(for="username") Username
     input(type="text" ng-model="login.username" class="form-control" id="username")
   div.form-group
-    label Password
+    label(for="password") Password
     input(type="password" ng-model="login.password" class="form-control")
-  button(type="submit" class="btn btn-default" ng-click="login.login()") Sign in
+  button(type="submit" class="btn btn-primary" ng-click="login.login()") Sign in

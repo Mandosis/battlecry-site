@@ -43,6 +43,8 @@ module.exports = function(grunt) {
                    "angular-ui-router/release/angular-ui-router.min.js",
                    "angular-loading-bar/build/loading-bar.min.js",
                    "angular-loading-bar/build/loading-bar.min.css",
+                   "angular-chart.js/dist/angular-chart.min.js",
+                   "angular-chart.js/dist/angular-chart.min.js.map",
                    "jquery/dist/jquery.min.js",
                    "jquery/dist/jquery.min.map",
                    "bootstrap/dist/js/bootstrap.min.js",
@@ -50,7 +52,8 @@ module.exports = function(grunt) {
                    "bootstrap/dist/css/bootstrap.min.css.map",
                    "bootstrap/dist/css/bootstrap-theme.min.css",
                    "bootstrap/dist/css/bootstrap-theme.min.map",
-                   "moment/min/moment.min.js"
+                   "moment/min/moment.min.js",
+                   "chart.js/dist/Chart.min.js"
                ],
                "dest": "server/public/vendor/"
            }

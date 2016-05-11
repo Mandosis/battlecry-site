@@ -1,1 +1,22 @@
-h1 Community stats
+h1 Community Stats
+
+p Kills {{community.data.stats.kills}}
+p Deaths {{community.data.stats.deaths}}
+p Won {{community.data.stats.won}}
+p Lost {{community.data.stats.lost}}
+p Control Points Captured: {{community.data.stats.captures}}
+p Games Played: {{community.data.stats.gamesPlayed}}
+
+div.col-md-2
+// K/D Chart
+div.col-md-4
+  div.panel.panel-default
+    h2.text-center Kills / Deaths
+    canvas(id="kdChart" class="center-block chart chart-doughnut" chart-data="community.data.stats.kdChart" chart-labels="community.kdLabels")
+
+// Win/Loss Chart
+div.col-md-4
+  div.panel.panel-default
+    h2.text-center Wins / Losses
+    canvas(id="wlChart" class="center-block chart chart-doughnut" chart-data="community.data.stats.wlChart" chart-labels="community.wlLabels")
+div.col-md-2

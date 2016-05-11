@@ -22,7 +22,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'ProfileController',
       controllerAs: 'profile'
     })
-
+    .when('/profile/edit', {
+      templateUrl: '/app/view/profile/edit',
+      controller: 'EditController',
+      controllerAs: 'edit'
+    })
     .when('/login', {
       templateUrl: '/app/view/login',
       controller: 'LoginController',

@@ -19,7 +19,7 @@ app.use(session({
   secret: config.secret,
   resave: true,
   saveUninitialized: false,
-  cookie: {maxAge: 600000, secure: false}
+  cookie: {maxAge: ((60000 * 60) * 24) * 7, secure: false} // Set cookie to expire after 1 week
 }));
 app.use(passport.initialize());
 app.use(passport.session());

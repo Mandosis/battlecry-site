@@ -51,6 +51,46 @@ app.controller('HomeController', ['HeadService', 'UserService', 'cfpLoadingBar',
 }]);
 
 /*******************************************************************************
+                                  Community
+*******************************************************************************/
+app.controller('CommunityController', ['HeadService', 'CommunityService', 'UserService', 'cfpLoadingBar', '$timeout', function(HeadService, CommunityService, UserService, cfpLoadingBar, $timeout) {
+  var vm = this;
+  vm.data = CommunityService.data;
+
+  // Set page title
+  HeadService.title('Community');
+
+  // Check if user is logged in
+  UserService.isAuthenticated(function() {});
+
+  // Fetch stats
+  CommunityService.stats();
+
+  // Kills/Deaths Chart
+  vm.kdLabels = ["Kills", "Deaths"];
+
+  // Wins/Losses Chart
+  vm.wlLabels = ['Wins', 'Losses'];
+
+  vm.startLoad = function() {
+    cfpLoadingBar.start();
+  };
+
+  vm.completeLoad = function() {
+    cfpLoadingBar.complete();
+  }
+
+  // fake the initial load so first time users can see the bar right away:
+  vm.startLoad();
+  vm.fakeIntro = true;
+  $timeout(function() {
+    vm.completeLoad();
+    vm.fakeIntro = false;
+  }, 1250);
+
+}])
+
+/*******************************************************************************
                                       404
 *******************************************************************************/
 app.controller('ErrorController', ['HeadService', 'UserService', 'cfpLoadingBar', '$timeout', function(HeadService, UserService, cfpLoadingBar, $timeout) {
@@ -85,11 +125,15 @@ app.controller('ErrorController', ['HeadService', 'UserService', 'cfpLoadingBar'
 /*******************************************************************************
                                   Sign in
 *******************************************************************************/
-app.controller('LoginController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location) {
+app.controller('LoginController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', '$templateCache', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location, $templateCache) {
   var vm = this;
   vm.username = '';
   vm.password = '';
   vm.error = '';
+
+  // Remove cached page
+  $templateCache.removeAll();
+
 
   // Set page title
   HeadService.title('Login');
@@ -133,25 +177,32 @@ app.controller('LoginController', ['HeadService', 'cfpLoadingBar', '$timeout', '
 /*******************************************************************************
                                   Logout
 *******************************************************************************/
-app.controller('LogoutController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location) {
+app.controller('LogoutController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', '$templateCache', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location, $templateCache) {
   var vm = this;
+
+  // Remove cached page
+  $templateCache.removeAll();
+
 
   // Set page title
   HeadService.title('Logout');
 
   // Check if user is logged in
-  UserService.isAuthenticated(function() {
+  UserService.isAuthenticated(function(status) {
+    if (status == true) {
+      // Logout the user
+      UserService.logout(function() {
+        UserService.isAuthenticated(function(status, user) {
+          console.log(status);
+          // Redirect back to the homepage
+          $location.path('/');
 
-  });
-
-  // Logout the user
-  UserService.logout(function() {
-    UserService.isAuthenticated(function(status, user) {
-      console.log(status);
+        });
+      });
+    } else {
       // Redirect back to the homepage
       $location.path('/');
-    });
-
+    }
   });
 
   vm.startLoad = function() {
@@ -213,6 +264,49 @@ app.controller('PlayerController', ['HeadService', 'UserService', '$http', 'cfpL
                                   Profile
 *******************************************************************************/
 app.controller('ProfileController', ['HeadService', 'UserService', '$http', 'cfpLoadingBar', '$timeout', 'ProfileService', '$routeParams', '$templateCache', function(HeadService, UserService, $http, cfpLoadingBar, $timeout, ProfileService, $routeParams, $templateCache) {
+  var vm = this;
+  vm.data = ProfileService.data;
+
+  // Remove cached page
+  $templateCache.removeAll();
+
+  // Set page title
+  HeadService.title(404);
+
+  // Check if user is logged in
+  UserService.isAuthenticated(function(success, data) {
+    // Set page title
+    HeadService.title(data.user.username);
+
+    // Get profile info
+    ProfileService.profile(data.user.username);
+
+
+    // Fetch stats
+    ProfileService.stats(data.user.username);
+  });
+
+  vm.startLoad = function() {
+    cfpLoadingBar.start();
+  };
+
+  vm.completeLoad = function() {
+    cfpLoadingBar.complete();
+  }
+
+  // fake the initial load so first time users can see the bar right away:
+  vm.startLoad();
+  vm.fakeIntro = true;
+  $timeout(function() {
+    vm.completeLoad();
+    vm.fakeIntro = false;
+  }, 1250);
+}]);
+
+/*******************************************************************************
+                              Profile Settings
+*******************************************************************************/
+app.controller('EditController', ['HeadService', 'UserService', '$http', 'cfpLoadingBar', '$timeout', 'ProfileService', '$routeParams', '$templateCache', function(HeadService, UserService, $http, cfpLoadingBar, $timeout, ProfileService, $routeParams, $templateCache) {
   var vm = this;
   vm.data = ProfileService.data;
 

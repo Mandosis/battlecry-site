@@ -29,6 +29,18 @@ router.get('/profile', function(req, res) {
   }
 });
 
+/*******************************************************************************
+                                  Profile
+*******************************************************************************/
+router.get('/profile/edit', function(req, res) {
+  // Check if user is authenticated
+  if (req.isAuthenticated()) {
+    res.render(path.join(__dirname, '../public/views/partials/editProfile.jade'));
+  } else {
+    res.render(path.join(__dirname, '../public/views/partials/404.jade'));
+  }
+});
+
 
 
 /*******************************************************************************

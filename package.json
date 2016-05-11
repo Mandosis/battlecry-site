@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.5.5",
+    "angular-chart.js": "^1.0.0-alpha6",
     "angular-loading-bar": "^0.9.0",
     "angular-route": "^1.5.5",
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",
+    "chart.js": "^2.1.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "jade": "^1.11.0",

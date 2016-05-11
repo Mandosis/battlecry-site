@@ -25,6 +25,55 @@ router.get('/players/:username', function(req, res) {
   })
 });
 
+// Get all users and calculate global stats
+router.get('/community/stats', function(req, res) {
+  // Set options for api request
+  var options = {
+    url: 'http://' + config.api + '/v1/players',
+
+    // Set a header for the api auth token
+    headers: {
+      'x-access-token': config.token
+    }
+  }
+
+  // Get all players from the api
+  request.get(options, function(error, response, body) {
+    // Convert the body to an object
+    body = JSON.parse(body);
+
+    // Get list of players from the body
+    var players = body.data;
+
+    // Create object to hold stats
+    var stats = {
+      players: body.data.length,
+      kills: 0,
+      deaths: 0,
+      won: 0,
+      lost: 0,
+      captures: 0,
+      gamesPlayed: 0
+    };
+
+    // Add up the stats from all players
+    for(var it = 0; it < players.length; it++) {
+      stats.kills += players[it].stats.overall.kills;
+      stats.deaths += players[it].stats.overall.deaths;
+      stats.won += players[it].stats.overall.won;
+      stats.lost += players[it].stats.overall.lost;
+      stats.captures += players[it].stats.conquest.captures;
+      stats.gamesPlayed += players[it].stats.overall.gamesPlayed;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Stats calculated.',
+      data: stats
+    });
+  });
+});
+
 // Get stats for username
 router.get('/players/:username/stats/', function(req, res) {
   var username = req.params.username;
@@ -87,9 +136,11 @@ router.get('/auth', function(req, res) {
 
 // Logout
 router.get('/logout', function(req, res) {
-  req.session.destroy();
   req.logout();
+  req.session.destroy();
   console.log('Logout route hit');
+  console.log(req.user);
+
   res.status(200).json({
     success: true,
     message: 'User logged out.'

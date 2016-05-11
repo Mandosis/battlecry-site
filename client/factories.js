@@ -78,7 +78,7 @@ app.factory('UserService', ['$http', function($http) {
   // Checked if user is authorized
   var isAuthenticated = function(callback) {
     $http.get('/app/v1/auth').then(function(response) {
-      if(response.data.success) {
+      if(response.data.success == true) {
         user.data = response.data.user;
         callback(true, response.data);
       } else {
@@ -92,5 +92,25 @@ app.factory('UserService', ['$http', function($http) {
     login: login,
     logout: logout,
     isAuthenticated: isAuthenticated
+  }
+}]);
+
+/*******************************************************************************
+                                Community
+*******************************************************************************/
+app.factory('CommunityService', ['$http', function($http) {
+  var data = {};
+
+  var stats = function() {
+    $http.get('/app/v1/community/stats').then(function(response) {
+      data.stats = response.data.data;
+      data.stats.kdChart = [data.stats.kills, data.stats.deaths];
+      data.stats.wlChart = [data.stats.won, data.stats.lost];
+    });
+  }
+
+  return {
+    data: data,
+    stats: stats,
   }
 }]);
