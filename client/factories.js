@@ -31,6 +31,22 @@ app.factory('ProfileService', ['$http', function($http) {
   var stats = function(username) {
     $http.get('/app/v1/players/' + username + '/stats').then(function(response) {
       data.stats = response.data;
+
+      // Create array for overall charts
+      data.stats.overall.kdChart = [data.stats.overall.kills, data.stats.overall.deaths];
+      data.stats.overall.wlChart = [data.stats.overall.won, data.stats.overall.lost];
+
+      // Create array for conquest charts
+      data.stats.conquest.kdChart = [data.stats.conquest.kills, data.stats.conquest.deaths];
+      data.stats.conquest.wlChart = [data.stats.conquest.won, data.stats.conquest.lost];
+
+      // Create array for Team Death Match charts
+      data.stats.teamDeathMatch.kdChart = [data.stats.teamDeathMatch.kills, data.stats.teamDeathMatch.deaths];
+      data.stats.teamDeathMatch.wlChart = [data.stats.teamDeathMatch.won, data.stats.teamDeathMatch.lost];
+
+      // Create array for Free For All charts
+      data.stats.freeForAll.kdChart = [data.stats.freeForAll.kills, data.stats.freeForAll.deaths];
+
     });
   }
 
@@ -82,6 +98,7 @@ app.factory('UserService', ['$http', function($http) {
         user.data = response.data.user;
         callback(true, response.data);
       } else {
+        user.data = {};
         callback(false);
       }
     });

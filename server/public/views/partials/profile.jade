@@ -6,7 +6,15 @@ a(href="/profile/edit")
 
 // Overall Stats
 h2 Overall
-p Rank: {{profile.data.stats.overall.rank}}
+
+div.col-md-4
+  // K/D Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.overall.kdChart" chart-labels="profile.kdLabels")
+
+div.col-md-4  
+  // W/L Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.overall.wlChart" chart-labels="profile.wlLabels")
+
 p K/D: {{profile.data.stats.overall.kd}}
 p Kills: {{profile.data.stats.overall.kills}}
 p Deaths: {{profile.data.stats.overall.deaths}}
@@ -14,8 +22,19 @@ p Won: {{profile.data.stats.overall.won}}
 p Lost: {{profile.data.stats.overall.lost}}
 p Games Played: {{profile.data.stats.overall.gamesPlayed}}
 
+// Donut chart with breakout of amount of games played in every game mode
+
 // Conquest stats
 h2 Conquest
+
+div.col-md-4
+  // K/D Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.conquest.kdChart" chart-labels="profile.kdLabels")
+
+div.col-md-4  
+  // W/L Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.conquest.wlChart" chart-labels="profile.wlLabels")
+
 p Kills: {{profile.data.stats.conquest.kills}}
 p Deaths: {{profile.data.stats.conquest.deaths}}
 p Won: {{profile.data.stats.conquest.won}}
@@ -25,6 +44,14 @@ p Games Played: {{profile.data.stats.conquest.gamesPlayed}}
 
 // Team Death Match stats
 h2 Team Death Match
+div.col-md-4
+  // K/D Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.teamDeathMatch.kdChart" chart-labels="profile.kdLabels")
+
+div.col-md-4  
+  // W/L Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.teamDeathMatch.wlChart" chart-labels="profile.wlLabels")
+
 p Kills: {{profile.data.stats.teamDeathMatch.kills}}
 p Deaths: {{profile.data.stats.teamDeathMatch.deaths}}
 p Won: {{profile.data.stats.teamDeathMatch.won}}
@@ -33,6 +60,10 @@ p Games Played: {{profile.data.stats.teamDeathMatch.gamesPlayed}}
 
 // Free for All stats
 h2 Free for All
+div.col-md-4
+  // K/D Chart
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.freeForAll.kdChart" chart-labels="profile.kdLabels")
+
 p Kills: {{profile.data.stats.freeForAll.kills}}
 p Deaths: {{profile.data.stats.freeForAll.deaths}}
 p Games Played: {{profile.data.stats.freeForAll.gamesPlayed}}

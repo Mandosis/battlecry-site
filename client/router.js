@@ -10,6 +10,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'CommunityController',
       controllerAs: 'community'
     })
+    .when('/about', {
+      templateUrl: '/app/view/about',
+      controller: 'AboutController',
+      controllerAs: 'about'
+    })
     .when('/player/:username', {
       templateUrl: function(params) {
         return '/app/view/player/' + params.username;

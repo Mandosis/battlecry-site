@@ -10,13 +10,9 @@ p Games Played: {{community.data.stats.gamesPlayed}}
 div.col-md-2
 // K/D Chart
 div.col-md-4
-  div.panel.panel-default
-    h2.text-center Kills / Deaths
-    canvas(id="kdChart" class="center-block chart chart-doughnut" chart-data="community.data.stats.kdChart" chart-labels="community.kdLabels")
+  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="community.kdOptions" chart-data="community.data.stats.kdChart" chart-labels="community.kdLabels")
 
 // Win/Loss Chart
 div.col-md-4
-  div.panel.panel-default
-    h2.text-center Wins / Losses
-    canvas(id="wlChart" class="center-block chart chart-doughnut" chart-data="community.data.stats.wlChart" chart-labels="community.wlLabels")
+  canvas(id="wlChart" class="center-block chart chart-doughnut" chart-options="community.wlOptions" chart-data="community.data.stats.wlChart" chart-labels="community.wlLabels")
 div.col-md-2

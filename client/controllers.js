@@ -68,6 +68,12 @@ app.controller('CommunityController', ['HeadService', 'CommunityService', 'UserS
 
   // Kills/Deaths Chart
   vm.kdLabels = ["Kills", "Deaths"];
+  vm.kdOptions = {
+    title: {
+      text: 'Kills / Deaths',
+      display: true,
+    }
+  }
 
   // Wins/Losses Chart
   vm.wlLabels = ['Wins', 'Losses'];
@@ -196,7 +202,6 @@ app.controller('LogoutController', ['HeadService', 'cfpLoadingBar', '$timeout', 
           console.log(status);
           // Redirect back to the homepage
           $location.path('/');
-
         });
       });
     } else {
@@ -273,6 +278,25 @@ app.controller('ProfileController', ['HeadService', 'UserService', '$http', 'cfp
   // Set page title
   HeadService.title(404);
 
+  // Kills/Deaths Chart
+  vm.kdLabels = ["Kills", "Deaths"];
+  vm.kdOptions = {
+    title: {
+      text: 'Kills / Deaths',
+      display: true,
+    }
+  }
+
+  // Win/Loss Chart
+  vm.wlLabels = ["Won", "Lost"];
+  vm.wlOptions = {
+    title: {
+      text: 'Won / Lost',
+      display: true,
+    }
+  }
+
+
   // Check if user is logged in
   UserService.isAuthenticated(function(success, data) {
     // Set page title
@@ -284,6 +308,7 @@ app.controller('ProfileController', ['HeadService', 'UserService', '$http', 'cfp
 
     // Fetch stats
     ProfileService.stats(data.user.username);
+
   });
 
   vm.startLoad = function() {

@@ -17,6 +17,13 @@ router.get('/home', function(req, res) {
 router.get('/login', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/login.jade'));
 });
+
+/*******************************************************************************
+                                  Logout
+*******************************************************************************/
+router.get('/logout', function(req, res) {
+  res.render(path.join(__dirname, '../public/views/partials/logout.jade'));
+});
 /*******************************************************************************
                                   Profile
 *******************************************************************************/
@@ -30,7 +37,7 @@ router.get('/profile', function(req, res) {
 });
 
 /*******************************************************************************
-                                  Profile
+                                Edit Profile
 *******************************************************************************/
 router.get('/profile/edit', function(req, res) {
   // Check if user is authenticated
@@ -72,6 +79,13 @@ router.get('/player/:username', function(req, res) {
 *******************************************************************************/
 router.get('/community', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/community.jade'))
+});
+
+/*******************************************************************************
+                                    About
+*******************************************************************************/
+router.get('/about', function(req, res) {
+  res.render(path.join(__dirname, '../public/views/partials/about.jade'))
 });
 
 /*******************************************************************************

@@ -13,6 +13,12 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
 
     ChartJsProvider.setOptions('doughnut', {
       chartColors: ['#FF3333', '#2222FF'],
+      // title: {
+      //   text: 'Hello!',
+      //   display: true,
+      //   fontColor: '#333',
+      //   fontSize: 23
+      // }
       // circumference: 1 * Math.PI,
       // rotation: 3 * Math.PI,
       // cutoutPercentage: 70

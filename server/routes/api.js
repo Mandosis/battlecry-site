@@ -1,7 +1,9 @@
 var router = require('express').Router();
 var request = require('request');
 var passport = require('passport');
+var multer = require('multer');
 var config = require('../../modules/config');
+var upload = multer({ dest: '../public/uploads' });
 
 router.get('/players/:username', function(req, res) {
   var username = req.params.username;
@@ -104,6 +106,29 @@ router.get('/players/:username/stats/', function(req, res) {
       res.sendStatus(500);
     }
   })
+});
+
+// Edit User
+router.post('/profile', upload.single('avatar'), function(req, res) {
+  if (req.isAuthenticated()) {
+
+    // Need to check what forms have been changed. set form key manually
+    // if username is changed
+    //  options.form = { username: req.body.username, etc... }
+
+    // Set options for post
+    var options = {
+      url: 'http://' + config.api + '/v1/players/' + req.user.username,
+      headers: {
+        'x-access-token': config.token
+      },
+      form: {
+        id: id,
+      }
+    };
+
+    request.post()
+  }
 });
 
 // Login
