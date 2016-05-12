@@ -42,6 +42,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'LogoutController',
       controllerAs: 'logout'
     })
+    .when('/register', {
+      templateUrl: '/app/view/register',
+      controller: 'RegisterController',
+      controllerAs: 'register'
+    })
     .otherwise({
       templateUrl: '/app/view/404',
       controller: 'ErrorController',

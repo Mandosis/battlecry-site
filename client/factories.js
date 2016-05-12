@@ -23,6 +23,7 @@ app.factory('ProfileService', ['$http', function($http) {
   // Get account information
   var profile = function(username) {
     $http.get('/app/v1/players/' + username).then(function(response) {
+      response.data.joined = moment(response.data.joined).calendar();
       data.account = response.data;
     });
   }
@@ -81,6 +82,31 @@ app.factory('UserService', ['$http', function($http) {
         message: 'Username or password incorrect'
       });
     });
+  };
+
+  // Register
+  var register = function(username, password, passwordConfirm, callback) {
+    // Client side check
+    if (password == passwordConfirm) {
+      var newUser = {
+        username: username,
+        password: password,
+        passwordConfirm: passwordConfirm
+      };
+
+
+      $http.post('/app/v1/register', newUser).then(function(response) {
+        callback(true);
+      }, function(response) {
+        if(response.status == 409) {
+          callback(false, 'Username taken');
+        } else {
+          callback(false, 'Internal error');
+        }
+      });
+    } else {
+      callback(false, 'Passwords are different');
+    }
   }
 
   // Logout
@@ -108,6 +134,7 @@ app.factory('UserService', ['$http', function($http) {
     user: user,
     login: login,
     logout: logout,
+    register: register,
     isAuthenticated: isAuthenticated
   }
 }]);

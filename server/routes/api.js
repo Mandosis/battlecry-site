@@ -27,7 +27,9 @@ router.get('/players/:username', function(req, res) {
   })
 });
 
-// Get all users and calculate global stats
+/*******************************************************************************
+                            Get Global Stats
+*******************************************************************************/
 router.get('/community/stats', function(req, res) {
   // Set options for api request
   var options = {
@@ -76,7 +78,9 @@ router.get('/community/stats', function(req, res) {
   });
 });
 
-// Get stats for username
+/*******************************************************************************
+                                  Get Stats
+*******************************************************************************/
 router.get('/players/:username/stats/', function(req, res) {
   var username = req.params.username;
 
@@ -108,7 +112,9 @@ router.get('/players/:username/stats/', function(req, res) {
   })
 });
 
-// Edit User
+/*******************************************************************************
+                                Edit Profile
+*******************************************************************************/
 router.post('/profile', upload.single('avatar'), function(req, res) {
   if (req.isAuthenticated()) {
 
@@ -131,7 +137,10 @@ router.post('/profile', upload.single('avatar'), function(req, res) {
   }
 });
 
-// Login
+/*******************************************************************************
+                                  Sign in
+*******************************************************************************/
+
 router.post('/login', passport.authenticate('local'), function(req, res) {
   // This only gets called if authentication is successful
   res.status(200).json({
@@ -159,7 +168,9 @@ router.get('/auth', function(req, res) {
   }
 });
 
-// Logout
+/*******************************************************************************
+                                  Logout
+*******************************************************************************/
 router.get('/logout', function(req, res) {
   req.logout();
   req.session.destroy();
@@ -170,6 +181,63 @@ router.get('/logout', function(req, res) {
     success: true,
     message: 'User logged out.'
   })
+});
+
+/*******************************************************************************
+                                  Register
+*******************************************************************************/
+router.post('/register', function(req, res) {
+  console.log(req.body);
+  if(req.isAuthenticated()) {
+    res.status(401).json({
+      success: false,
+      message: 'Already signed in!'
+    });
+  } else {
+    console.log('Comparing passwords');
+    // Compare passwords
+    console.log(req.body.password, req.body.passwordConfirm);
+    if (req.body.password == req.body.passwordConfirm) {
+      console.log('Passwords the same!');
+
+      // Set options for post request
+      var options = {
+        url: 'http://' + config.api + '/v1/players/',
+        headers: {
+          'x-access-token': config.token
+        },
+        form: {
+          username: req.body.username,
+          password: req.body.password
+        }
+      };
+
+      request.post(options, function(error, response, body) {
+        console.log(body);
+
+        if(!error && response.statusCode < 300) {
+          // Convert body to object
+          body = JSON.parse(body);
+
+          res.status(response.statusCode).json(results.data);
+        } else if(!error && response.statusCode >= 400 && response.statusCode < 500) {
+          res.status(response.statusCode).json(body);
+        } else {
+          res.status(response.statusCode).json(body);
+        }
+
+      });
+
+
+    } else {
+      console.log('Passwords not the same');
+      res.status(500).json({
+        success: false,
+        message: 'Password comparison failed'
+      });
+    }
+
+  }
 })
 
 module.exports = router;

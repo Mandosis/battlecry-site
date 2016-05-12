@@ -181,6 +181,71 @@ app.controller('LoginController', ['HeadService', 'cfpLoadingBar', '$timeout', '
 }]);
 
 /*******************************************************************************
+                                  Sign up
+*******************************************************************************/
+app.controller('RegisterController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', '$templateCache', '$location', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location, $templateCache, $location) {
+  var vm = this;
+  vm.username = '';
+  vm.password = '';
+  vm.passwordConfrim = '';
+  vm.errors = [];
+
+  // Remove cached page
+  $templateCache.removeAll();
+
+
+  // Set page title
+  HeadService.title('Register');
+
+  // Check if user is logged in
+  UserService.isAuthenticated(function(status) {
+    if (status == true) {
+      $location.path('/');
+    }
+  });
+
+  vm.register = function() {
+    console.log('register clicked');
+    UserService.register(vm.username, vm.password, vm.passwordConfirm, function(success, message) {
+      if(success == true) {
+        $location.path('/');
+      } else {
+
+        // Check if message was already added
+        var addMessage = true;
+        for(var it = 0; it < vm.errors.length; it++) {
+          if (vm.errors[it] == message) {
+            addMessage = false;
+            return
+          }
+        }
+
+        // If the message is unique, add it to the array
+        if (addMessage == true) {
+          vm.errors.push(message);
+        }
+      }
+    });
+  }
+
+  vm.startLoad = function() {
+    cfpLoadingBar.start();
+  };
+
+  vm.completeLoad = function() {
+    cfpLoadingBar.complete();
+  }
+
+  // fake the initial load so first time users can see the bar right away:
+  vm.startLoad();
+  vm.fakeIntro = true;
+  $timeout(function() {
+    vm.completeLoad();
+    vm.fakeIntro = false;
+  }, 1250);
+}]);
+
+/*******************************************************************************
                                   Logout
 *******************************************************************************/
 app.controller('LogoutController', ['HeadService', 'cfpLoadingBar', '$timeout', 'UserService', '$routeParams', '$location', '$templateCache', function(HeadService, cfpLoadingBar, $timeout, UserService, $routeParams, $location, $templateCache) {

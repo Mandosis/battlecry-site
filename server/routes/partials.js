@@ -24,6 +24,13 @@ router.get('/login', function(req, res) {
 router.get('/logout', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/logout.jade'));
 });
+
+/*******************************************************************************
+                                Register
+*******************************************************************************/
+router.get('/register', function(req, res) {
+  res.render(path.join(__dirname, '../public/views/partials/register.jade'));
+});
 /*******************************************************************************
                                   Profile
 *******************************************************************************/
