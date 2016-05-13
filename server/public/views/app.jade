@@ -17,7 +17,8 @@ html(ng-app="battlecryApp")
     nav(class="navbar navbar-default")
       div.container-fluid
         // Logo
-        a(class="navbar-brand" href="/") Battlecry
+        a(class="navbar-brand" href="/")
+          img(src="/assets/images/logo.png" height="70px")
         
         // Navigation Links
         ul(class="nav navbar-nav")
@@ -38,5 +39,5 @@ html(ng-app="battlecryApp")
             a(href="/logout") Logout
                 
     // Appliction view
-    main(class="container-fluid")
+    main
       section(ng-view)

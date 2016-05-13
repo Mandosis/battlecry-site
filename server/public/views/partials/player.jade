@@ -1,40 +1,41 @@
-h1 {{player.data.account.username}}
-p {{player.data.account.joined}}
+div.container-fluid
+  h1 {{player.data.account.username}}
+  p {{player.data.account.joined}}
 
-p #{username}
-if authorized
-  a(href="/player/edit")
-    button(class="btn btn-default") Edit Profile
+  p #{username}
+  if authorized
+    a(href="/player/edit")
+      button(class="btn btn-default") Edit Profile
 
-// Overall Stats
-h2 Overall
-p Rank: {{player.data.stats.overall.rank}}
-p K/D: {{player.data.stats.overall.kd}}
-p Kills: {{player.data.stats.overall.kills}}
-p Deaths: {{player.data.stats.overall.deaths}}
-p Won: {{player.data.stats.overall.won}}
-p Lost: {{player.data.stats.overall.lost}}
-p Games Played: {{player.data.stats.overall.gamesPlayed}}
+  // Overall Stats
+  h2 Overall
+  p Rank: {{player.data.stats.overall.rank}}
+  p K/D: {{player.data.stats.overall.kd}}
+  p Kills: {{player.data.stats.overall.kills}}
+  p Deaths: {{player.data.stats.overall.deaths}}
+  p Won: {{player.data.stats.overall.won}}
+  p Lost: {{player.data.stats.overall.lost}}
+  p Games Played: {{player.data.stats.overall.gamesPlayed}}
 
-// Conquest stats
-h2 Conquest
-p Kills: {{player.data.stats.conquest.kills}}
-p Deaths: {{player.data.stats.conquest.deaths}}
-p Won: {{player.data.stats.conquest.won}}
-p Lost: {{player.data.stats.conquest.lost}}
-p CP Captures: {{player.data.stats.conquest.captures}}
-p Games Played: {{player.data.stats.conquest.gamesPlayed}}
+  // Conquest stats
+  h2 Conquest
+  p Kills: {{player.data.stats.conquest.kills}}
+  p Deaths: {{player.data.stats.conquest.deaths}}
+  p Won: {{player.data.stats.conquest.won}}
+  p Lost: {{player.data.stats.conquest.lost}}
+  p CP Captures: {{player.data.stats.conquest.captures}}
+  p Games Played: {{player.data.stats.conquest.gamesPlayed}}
 
-// Team Death Match stats
-h2 Team Death Match
-p Kills: {{player.data.stats.teamDeathMatch.kills}}
-p Deaths: {{player.data.stats.teamDeathMatch.deaths}}
-p Won: {{player.data.stats.teamDeathMatch.won}}
-p Lost: {{player.data.stats.teamDeathMatch.lost}}
-p Games Played: {{player.data.stats.teamDeathMatch.gamesPlayed}}
+  // Team Death Match stats
+  h2 Team Death Match
+  p Kills: {{player.data.stats.teamDeathMatch.kills}}
+  p Deaths: {{player.data.stats.teamDeathMatch.deaths}}
+  p Won: {{player.data.stats.teamDeathMatch.won}}
+  p Lost: {{player.data.stats.teamDeathMatch.lost}}
+  p Games Played: {{player.data.stats.teamDeathMatch.gamesPlayed}}
 
-// Free for All stats
-h2 Free for All
-p Kills: {{player.data.stats.freeForAll.kills}}
-p Deaths: {{player.data.stats.freeForAll.deaths}}
-p Games Played: {{player.data.stats.freeForAll.gamesPlayed}}
+  // Free for All stats
+  h2 Free for All
+  p Kills: {{player.data.stats.freeForAll.kills}}
+  p Deaths: {{player.data.stats.freeForAll.deaths}}
+  p Games Played: {{player.data.stats.freeForAll.gamesPlayed}}

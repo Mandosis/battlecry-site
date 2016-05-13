@@ -1,30 +1,57 @@
-h1 Find a player
+div.container-fluid
+  h1 Community Stats
 
-// Seach
-form
-  div.input-group
-    input(type="search" class="form-control" ng-model="community.searchInput")
-    span.input-group-btn
-      button(class="btn btn-primary" ng-click="community.search()") Search
+  // K/D Chart
+  div.col-md-6
+    div.well
+      h6.text-center Kills / Deaths
+      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="community.kdOptions" chart-data="community.data.stats.kdChart" chart-labels="community.kdLabels")
+        
+  // Win/Loss Chart
+  div.col-md-6
+    div.well
+      h6.text-center Won / Lost
+      canvas(id="wlChart" class="center-block chart chart-doughnut" chart-options="community.wlOptions" chart-data="community.data.stats.wlChart" chart-labels="community.wlLabels")
+  div.col-md-4
+    div.well
+      h6.text-center Kills
+      h1.text-center {{community.data.stats.kills}}
 
-p {{community.searchError}}
+  div.col-md-4
+    div.well
+      h6.text-center Deaths
+      h1.text-center {{community.data.stats.deaths}}
 
+        
+  div.col-md-4
+    div.well
+      h6.text-center Won
+      h1.text-center {{community.data.stats.won}}
+        
+  div.col-md-4
+    div.well
+      h6.text-center Lost
+      h1.text-center {{community.data.stats.lost}}
+  
+  div.col-md-4
+    div.well
+      h6.text-center Games Played
+      h1.text-center {{community.data.stats.gamesPlayed}}
+      
+  div.col-md-4
+    div.well
+      h6.text-center Control Points Captured
+      h1.text-center {{community.data.stats.captures}}
+      
+  div.col-md-12
+    div.well
+      h6.text-center Find a player
 
-h1 Community Stats
+      // Seach
+      form
+        div.input-group
+          input(type="search" class="form-control" ng-model="community.searchInput")
+          span.input-group-btn
+            button(class="btn btn-primary" ng-click="community.search()") Search
 
-p Kills {{community.data.stats.kills}}
-p Deaths {{community.data.stats.deaths}}
-p Won {{community.data.stats.won}}
-p Lost {{community.data.stats.lost}}
-p Control Points Captured: {{community.data.stats.captures}}
-p Games Played: {{community.data.stats.gamesPlayed}}
-
-div.col-md-2
-// K/D Chart
-div.col-md-4
-  canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="community.kdOptions" chart-data="community.data.stats.kdChart" chart-labels="community.kdLabels")
-
-// Win/Loss Chart
-div.col-md-4
-  canvas(id="wlChart" class="center-block chart chart-doughnut" chart-options="community.wlOptions" chart-data="community.data.stats.wlChart" chart-labels="community.wlLabels")
-div.col-md-2
+      p.text-danger {{community.searchError}}

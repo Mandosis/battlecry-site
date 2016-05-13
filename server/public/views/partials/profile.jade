@@ -1,88 +1,204 @@
-h1 {{profile.data.account.username}}
-p Joined: {{profile.data.account.joined}}
+div.container-fluid
+  h1 {{profile.data.account.username}}
+  p Joined: {{profile.data.account.joined}}
 
-a(href="/profile/edit")
-  button(class="btn btn-default") Edit Profile
-
-// Overall Stats
-h2 Overall
-
-div(ng-if="profile.data.stats.overall.gamesPlayed != 0")
-  div.col-md-4
-    // K/D Chart
-    canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.overall.kdChart" chart-labels="profile.kdLabels")
-
-  div.col-md-4  
-    // W/L Chart
-    canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.overall.wlChart" chart-labels="profile.wlLabels")
-
-  p K/D: {{profile.data.stats.overall.kd}}
-  p Kills: {{profile.data.stats.overall.kills}}
-  p Deaths: {{profile.data.stats.overall.deaths}}
-  p Won: {{profile.data.stats.overall.won}}
-  p Lost: {{profile.data.stats.overall.lost}}
-  p Games Played: {{profile.data.stats.overall.gamesPlayed}}
-
-  // Donut chart with breakout of amount of games played in every game mode
+  a(href="/profile/edit")
+    button(class="btn btn-default") Edit Profile
 
 
-  // Conquest stats
-  h2 Conquest
 
-  div(ng-if="profile.data.stats.conquest.gamesPlayed != 0")
+
+  h2 Overall
+
+  div(ng-if="profile.data.stats.overall.gamesPlayed != 0")
+    div.col-md-6
+      div.well
+        h6.text-center Kills / Deaths
+        canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.overall.kdChart" chart-labels="profile.kdLabels")
+
+    div.col-md-6
+      div.well
+        h6.text-center Won / Lost
+        canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.overall.wlChart" chart-labels="profile.wlLabels")
+          
     div.col-md-4
-      // K/D Chart
-      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.conquest.kdChart" chart-labels="profile.kdLabels")
+      div.well
+        h6.text-center K / D
+        h1.text-center {{profile.data.stats.overall.kd}}
 
-    div.col-md-4  
-      // W/L Chart
-      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.conquest.wlChart" chart-labels="profile.wlLabels")
-
-    p Kills: {{profile.data.stats.conquest.kills}}
-    p Deaths: {{profile.data.stats.conquest.deaths}}
-    p Won: {{profile.data.stats.conquest.won}}
-    p Lost: {{profile.data.stats.conquest.lost}}
-    p CP Captures: {{profile.data.stats.conquest.captures}}
-    p Games Played: {{profile.data.stats.conquest.gamesPlayed}}
-
-  div(ng-if="profile.data.stats.conquest.gamesPlayed == 0")
-    p You have not played this game mode yet!
-
-  // Team Death Match stats
-  h2 Team Death Match
-  div(ng-if="profile.data.stats.teamDeathMatch.gamesPlayed != 0")
     div.col-md-4
-      // K/D Chart
-      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.teamDeathMatch.kdChart" chart-labels="profile.kdLabels")
+      div.well
+        h6.text-center Kills
+        h1.text-center {{profile.data.stats.overall.kills}}
 
-    div.col-md-4  
-      // W/L Chart
-      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.teamDeathMatch.wlChart" chart-labels="profile.wlLabels")
-
-    p Kills: {{profile.data.stats.teamDeathMatch.kills}}
-    p Deaths: {{profile.data.stats.teamDeathMatch.deaths}}
-    p Won: {{profile.data.stats.teamDeathMatch.won}}
-    p Lost: {{profile.data.stats.teamDeathMatch.lost}}
-    p Games Played: {{profile.data.stats.teamDeathMatch.gamesPlayed}}
-    
-  div(ng-if="profile.data.stats.teamDeathMatch.gamesPlayed == 0")
-    p You have not played this game mode yet!
-
-  // Free for All stats
-  h2 Free for All
-
-  //- Hide stats
-  div(ng-if="profile.data.stats.freeForAll.gamesPlayed != 0")
     div.col-md-4
-      // K/D Chart
-      canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.freeForAll.kdChart" chart-labels="profile.kdLabels")
+      div.well
+        h6.text-center Deaths
+        h1.text-center {{profile.data.stats.overall.deaths}}
+        
+    div.col-md-4
+      div.well
+        h6.text-center Won
+        h1.text-center {{profile.data.stats.overall.won}}
+        
+    div.col-md-4
+      div.well
+        h6.text-center Lost
+        h1.text-center {{profile.data.stats.overall.lost}}
+        
+    div.col-md-4
+      div.well
+        h6.text-center Games Played
+        h1.text-center {{profile.data.stats.overall.gamesPlayed}}
+        
+    //-- Donut chart with breakout of amount of games played in every game mode
 
-    p Kills: {{profile.data.stats.freeForAll.kills}}
-    p Deaths: {{profile.data.stats.freeForAll.deaths}}
-    p Games Played: {{profile.data.stats.freeForAll.gamesPlayed}}
-    
-  div(ng-if="profile.data.stats.freeForAll.gamesPlayed == 0")
-    p You have not played this game mode yet!
-    
-div(ng-if="profile.data.stats.overall.gamesPlayed == 0")
-  p Play the game to view your stats here
+
+
+
+
+
+    // Conquest stats
+    h2 Conquest
+
+    div(ng-if="profile.data.stats.conquest.gamesPlayed != 0")
+      div.col-md-6
+        div.well
+          h6.text-center Kills / Deaths
+          // K/D Chart
+          canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.conquest.kdChart" chart-labels="profile.kdLabels")
+
+      div.col-md-6
+        div.well
+          h6.text-center Won / Lost
+          // W/L Chart
+          canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.conquest.wlChart" chart-labels="profile.wlLabels")
+
+      div.col-md-4
+        div.well
+          h6.text-center K / D
+          h1.text-center {{profile.data.stats.conquest.kd}}
+          
+      div.col-md-4
+        div.well
+          h6.text-center Kills
+          h1.text-center {{profile.data.stats.conquest.kills}}
+          
+      div.col-md-4
+        div.well
+          h6.text-center Deaths
+          h1.text-center {{profile.data.stats.conquest.deaths}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Won
+          h1.text-center {{profile.data.stats.conquest.won}}
+          
+      div.col-md-4
+        div.well
+          h6.text-center Lost
+          h1.text-center {{profile.data.stats.conquest.lost}}
+          
+      div.col-md-4
+        div.well
+          h6.text-center Control Points Captured
+          h1.text-center {{profile.data.stats.conquest.captures}}
+
+      div.col-md-12
+        div.well
+          h6.text-center Games Played
+          h1.text-center {{profile.data.stats.conquest.gamesPlayed}}
+
+    div(ng-if="profile.data.stats.conquest.gamesPlayed == 0")
+      p You have not played this game mode yet!
+      
+      
+      
+      
+
+    // Team Death Match stats
+    h2 Team Death Match
+    div(ng-if="profile.data.stats.teamDeathMatch.gamesPlayed != 0")
+      div.col-md-6
+        div.well
+          h6.text-center Kills / Deaths
+          canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.teamDeathMatch.kdChart" chart-labels="profile.kdLabels")
+
+      div.col-md-6  
+        div.well
+          h6.text-center Won / Lost
+          canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.teamDeathMatch.wlChart" chart-labels="profile.wlLabels")
+
+      div.col-md-4
+        div.well
+          h6.text-center K / D
+          h1.text-center {{profile.data.stats.teamDeathMatch.kd}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Kills
+          h1.text-center {{profile.data.stats.teamDeathMatch.kills}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Deaths
+          h1.text-center {{profile.data.stats.teamDeathMatch.deaths}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Won
+          h1.text-center {{profile.data.stats.teamDeathMatch.won}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Lost
+          h1.text-center {{profile.data.stats.teamDeathMatch.lost}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Games Played
+          h1.text-center {{profile.data.stats.teamDeathMatch.gamesPlayed}}
+      
+    div(ng-if="profile.data.stats.teamDeathMatch.gamesPlayed == 0")
+      p You have not played this game mode yet!
+      
+      
+      
+      
+      
+
+    // Free for All stats
+    h2 Free for All
+
+    //- Hide stats
+    div(ng-if="profile.data.stats.freeForAll.gamesPlayed != 0")
+      div.col-md-12
+        div.well
+          h6.text-center Kills / Deaths
+          canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.freeForAll.kdChart" chart-labels="profile.kdLabels")
+
+      div.col-md-4
+        div.well
+          h6.text-center K / D
+          h1.text-center {{profile.data.stats.freeForAll.kd}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Kills
+          h1.text-center {{profile.data.stats.freeForAll.kills}}
+
+      div.col-md-4
+        div.well
+          h6.text-center Deaths
+          h1.text-center {{profile.data.stats.freeForAll.deaths}}
+
+      div.col-md-12
+        div.well
+          h6.text-center Games Played
+          h1.text-center {{profile.data.stats.freeForAll.gamesPlayed}}
+      
+    div(ng-if="profile.data.stats.freeForAll.gamesPlayed == 0")
+      p You have not played this game mode yet!
+      
+  div(ng-if="profile.data.stats.overall.gamesPlayed == 0")
+    p Play the game to view your stats here

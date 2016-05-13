@@ -1,27 +1,28 @@
-h1 Edit Profile
+div.container-fluid
+  h1 Edit Profile
 
-form        
-  div.panel.panel-danger
-    div.panel-heading
-      h3.panel-title Change password
-    div.panel-body
+  form        
+    div.panel.panel-danger
+      div.panel-heading
+        h3.panel-title Change password
+      div.panel-body
 
-      // Change password
-      div.form-group
-        // Current password
-        label(for="currentPassword") Current Password
-        input(type="password" ng-model="edit.currentPassword" class="form-control" id="currentPassword")
-        
-      // New password
-      div.form-group
-        label(for="newPassword") New Password
-        input(type="password" ng-model="edit.newPassword" class="form-control" id="newPassword")
+        // Change password
+        div.form-group
+          // Current password
+          label(for="currentPassword") Current Password
+          input(type="password" ng-model="edit.currentPassword" class="form-control" id="currentPassword")
           
-      // Confirm new password
-      div.form-group
-        label(for="confirmNewPassword") Confirm new password
-        input(type="password" ng-model="edit.confirmNewPassword" class="form-control" id="confirmNewPassword")
+        // New password
+        div.form-group
+          label(for="newPassword") New Password
+          input(type="password" ng-model="edit.newPassword" class="form-control" id="newPassword")
+            
+        // Confirm new password
+        div.form-group
+          label(for="confirmNewPassword") Confirm new password
+          input(type="password" ng-model="edit.confirmNewPassword" class="form-control" id="confirmNewPassword")
+        
+        // Save button
+        button(type="submit" class="btn btn-danger") Change
       
-      // Save button
-      button(type="submit" class="btn btn-danger") Change
-    

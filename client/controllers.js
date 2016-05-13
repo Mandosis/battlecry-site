@@ -84,10 +84,6 @@ app.controller('CommunityController', ['HeadService', 'CommunityService', 'UserS
   // Kills/Deaths Chart
   vm.kdLabels = ["Kills", "Deaths"];
   vm.kdOptions = {
-    title: {
-      text: 'Kills / Deaths',
-      display: true,
-    }
   }
 
   // Wins/Losses Chart
@@ -361,19 +357,11 @@ app.controller('ProfileController', ['HeadService', 'UserService', '$http', 'cfp
   // Kills/Deaths Chart
   vm.kdLabels = ["Kills", "Deaths"];
   vm.kdOptions = {
-    title: {
-      text: 'Kills / Deaths',
-      display: true,
-    }
   }
 
   // Win/Loss Chart
   vm.wlLabels = ["Won", "Lost"];
   vm.wlOptions = {
-    title: {
-      text: 'Won / Lost',
-      display: true,
-    }
   }
 
 

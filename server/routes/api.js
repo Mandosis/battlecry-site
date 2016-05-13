@@ -98,9 +98,15 @@ router.get('/players/:username/stats/', function(req, res) {
 
       // Calculate the K/D ratio
       results.data.overall.kd = results.data.overall.kills / results.data.overall.deaths;
+      results.data.conquest.kd = results.data.conquest.kills / results.data.overall.deaths;
+      results.data.teamDeathMatch.kd = results.data.teamDeathMatch.kills / results.data.teamDeathMatch.deaths;
+      results.data.freeForAll.kd = results.data.freeForAll.kills / results.data.freeForAll.deaths;
 
       // Round K/D
       results.data.overall.kd = Number(results.data.overall.kd.toFixed(1));
+      results.data.conquest.kd = Number(results.data.conquest.kd.toFixed(1));
+      results.data.teamDeathMatch.kd = Number(results.data.teamDeathMatch.kd.toFixed(1));
+      results.data.freeForAll.kd = Number(results.data.freeForAll.kd.toFixed(1));
 
       // Send just the data
       res.send(results.data);
@@ -241,7 +247,7 @@ router.post('/register', function(req, res) {
 });
 
 /*******************************************************************************
-                                  Search
+                                Edit Password
 *******************************************************************************/
 router.post('/profile/edit/password', function(req, res) {
   var passwordOld = req.body.passwordOld
