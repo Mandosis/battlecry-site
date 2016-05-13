@@ -1,3 +1,15 @@
+h1 Find a player
+
+// Seach
+form
+  div.input-group
+    input(type="search" class="form-control" ng-model="community.searchInput")
+    span.input-group-btn
+      button(class="btn btn-primary" ng-click="community.search()") Search
+
+p {{community.searchError}}
+
+
 h1 Community Stats
 
 p Kills {{community.data.stats.kills}}

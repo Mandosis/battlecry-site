@@ -238,6 +238,41 @@ router.post('/register', function(req, res) {
     }
 
   }
-})
+});
+
+/*******************************************************************************
+                                  Search
+*******************************************************************************/
+router.post('/profile/edit/password', function(req, res) {
+  var passwordOld = req.body.passwordOld
+  var passwordNew = req.body.passwordNew;
+  var passwordConfirm = req.body.passwordConfirm;
+
+});
+
+/*******************************************************************************
+                                  Search
+*******************************************************************************/
+router.get('/community/search/:username', function(req, res) {
+  var username = req.params.username;
+
+  var options = {
+    url: 'http://' + config.api +'/v1/players/' + req.params.username,
+    headers: {
+      'x-access-token': config.token
+    }
+  };
+
+  request.get(options, function(error, response, body) {
+    if(!error && response.statusCode < 300) {
+      var results = JSON.parse(body);
+      res.sendStatus(200);
+    } else if(!error && response.statusCode == 404) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(500);
+    }
+  });
+});
 
 module.exports = router;

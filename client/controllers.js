@@ -53,15 +53,30 @@ app.controller('HomeController', ['HeadService', 'UserService', 'cfpLoadingBar',
 /*******************************************************************************
                                   Community
 *******************************************************************************/
-app.controller('CommunityController', ['HeadService', 'CommunityService', 'UserService', 'cfpLoadingBar', '$timeout', function(HeadService, CommunityService, UserService, cfpLoadingBar, $timeout) {
+app.controller('CommunityController', ['HeadService', 'CommunityService', 'UserService', 'cfpLoadingBar', '$timeout', '$location', function(HeadService, CommunityService, UserService, cfpLoadingBar, $timeout, $location) {
   var vm = this;
   vm.data = CommunityService.data;
+  vm.searchInput = '';
+  vm.searchError = '';
 
   // Set page title
   HeadService.title('Community');
 
   // Check if user is logged in
   UserService.isAuthenticated(function() {});
+
+  // Search
+  vm.search = function() {
+    console.log('searching');
+    CommunityService.search(vm.searchInput, function(found) {
+      if (found == true) {
+        vm.searchError = '';
+        $location.path('/player/' + vm.searchInput);
+      } else {
+        vm.searchError = 'Player not found';
+      }
+    });
+  }
 
   // Fetch stats
   CommunityService.stats();

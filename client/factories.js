@@ -153,8 +153,17 @@ app.factory('CommunityService', ['$http', function($http) {
     });
   }
 
+  var search = function(username, callback) {
+    $http.get('/app/v1/community/search/' + username).then(function(response) {
+      callback(true);
+    }, function(response) {
+      callback(false);
+    })
+  }
+
   return {
     data: data,
     stats: stats,
+    search: search
   }
 }]);
