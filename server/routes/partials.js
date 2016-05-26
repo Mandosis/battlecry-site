@@ -9,6 +9,7 @@ var config = require('../../modules/config');
 *******************************************************************************/
 router.get('/home', function(req, res) {
   res.render(path.join(__dirname, '../public/views/partials/home.jade'));
+  console.log(req.user);
 });
 
 /*******************************************************************************

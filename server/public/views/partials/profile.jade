@@ -1,9 +1,9 @@
 div.container-fluid
-  h1 {{profile.data.account.username}}
-  p Joined: {{profile.data.account.joined}}
+  h1.text-center {{profile.data.account.username}}
+  p.text-center Joined: {{profile.data.account.joined}}
 
   a(href="/profile/edit")
-    button(class="btn btn-default") Edit Profile
+    button(class="btn btn-default center-block") Edit Profile
 
 
 
@@ -29,27 +29,27 @@ div.container-fluid
     div.col-md-4
       div.well
         h6.text-center Kills
-        h1.text-center {{profile.data.stats.overall.kills}}
+        h1.text-center {{profile.data.stats.overall.kills.toLocaleString()}}
 
     div.col-md-4
       div.well
         h6.text-center Deaths
-        h1.text-center {{profile.data.stats.overall.deaths}}
+        h1.text-center {{profile.data.stats.overall.deaths.toLocaleString()}}
         
     div.col-md-4
       div.well
         h6.text-center Won
-        h1.text-center {{profile.data.stats.overall.won}}
+        h1.text-center {{profile.data.stats.overall.won.toLocaleString()}}
         
     div.col-md-4
       div.well
         h6.text-center Lost
-        h1.text-center {{profile.data.stats.overall.lost}}
+        h1.text-center {{profile.data.stats.overall.lost.toLocaleString()}}
         
     div.col-md-4
       div.well
         h6.text-center Games Played
-        h1.text-center {{profile.data.stats.overall.gamesPlayed}}
+        h1.text-center {{profile.data.stats.overall.gamesPlayed.toLocaleString()}}
         
     //-- Donut chart with breakout of amount of games played in every game mode
 
@@ -65,13 +65,11 @@ div.container-fluid
       div.col-md-6
         div.well
           h6.text-center Kills / Deaths
-          // K/D Chart
           canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.kdOptions" chart-data="profile.data.stats.conquest.kdChart" chart-labels="profile.kdLabels")
 
       div.col-md-6
         div.well
           h6.text-center Won / Lost
-          // W/L Chart
           canvas(id="kdChart" class="center-block chart chart-doughnut" chart-options="profile.wlOptions" chart-data="profile.data.stats.conquest.wlChart" chart-labels="profile.wlLabels")
 
       div.col-md-4
@@ -82,32 +80,32 @@ div.container-fluid
       div.col-md-4
         div.well
           h6.text-center Kills
-          h1.text-center {{profile.data.stats.conquest.kills}}
+          h1.text-center {{profile.data.stats.conquest.kills.toLocaleString()}}
           
       div.col-md-4
         div.well
           h6.text-center Deaths
-          h1.text-center {{profile.data.stats.conquest.deaths}}
+          h1.text-center {{profile.data.stats.conquest.deaths.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Won
-          h1.text-center {{profile.data.stats.conquest.won}}
+          h1.text-center {{profile.data.stats.conquest.won.toLocaleString()}}
           
       div.col-md-4
         div.well
           h6.text-center Lost
-          h1.text-center {{profile.data.stats.conquest.lost}}
+          h1.text-center {{profile.data.stats.conquest.lost.toLocaleString()}}
           
       div.col-md-4
         div.well
           h6.text-center Control Points Captured
-          h1.text-center {{profile.data.stats.conquest.captures}}
+          h1.text-center {{profile.data.stats.conquest.captures.toLocaleString()}}
 
       div.col-md-12
         div.well
           h6.text-center Games Played
-          h1.text-center {{profile.data.stats.conquest.gamesPlayed}}
+          h1.text-center {{profile.data.stats.conquest.gamesPlayed.toLocaleString()}}
 
     div(ng-if="profile.data.stats.conquest.gamesPlayed == 0")
       p You have not played this game mode yet!
@@ -137,27 +135,27 @@ div.container-fluid
       div.col-md-4
         div.well
           h6.text-center Kills
-          h1.text-center {{profile.data.stats.teamDeathMatch.kills}}
+          h1.text-center {{profile.data.stats.teamDeathMatch.kills.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Deaths
-          h1.text-center {{profile.data.stats.teamDeathMatch.deaths}}
+          h1.text-center {{profile.data.stats.teamDeathMatch.deaths.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Won
-          h1.text-center {{profile.data.stats.teamDeathMatch.won}}
+          h1.text-center {{profile.data.stats.teamDeathMatch.won.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Lost
-          h1.text-center {{profile.data.stats.teamDeathMatch.lost}}
+          h1.text-center {{profile.data.stats.teamDeathMatch.lost.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Games Played
-          h1.text-center {{profile.data.stats.teamDeathMatch.gamesPlayed}}
+          h1.text-center {{profile.data.stats.teamDeathMatch.gamesPlayed.toLocaleString()}}
       
     div(ng-if="profile.data.stats.teamDeathMatch.gamesPlayed == 0")
       p You have not played this game mode yet!
@@ -185,20 +183,22 @@ div.container-fluid
       div.col-md-4
         div.well
           h6.text-center Kills
-          h1.text-center {{profile.data.stats.freeForAll.kills}}
+          h1.text-center {{profile.data.stats.freeForAll.kills.toLocaleString()}}
 
       div.col-md-4
         div.well
           h6.text-center Deaths
-          h1.text-center {{profile.data.stats.freeForAll.deaths}}
+          h1.text-center {{profile.data.stats.freeForAll.deaths.toLocaleString()}}
 
       div.col-md-12
         div.well
           h6.text-center Games Played
-          h1.text-center {{profile.data.stats.freeForAll.gamesPlayed}}
+          h1.text-center {{profile.data.stats.freeForAll.gamesPlayed.toLocaleString()}}
       
     div(ng-if="profile.data.stats.freeForAll.gamesPlayed == 0")
       p You have not played this game mode yet!
       
   div(ng-if="profile.data.stats.overall.gamesPlayed == 0")
-    p Play the game to view your stats here
+    div.col-md-12
+      div.well
+        p.text-center Play the game to view your stats here

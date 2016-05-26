@@ -1,17 +1,17 @@
 div.container-fluid
   h1 Edit Profile
 
-  form        
-    div.panel.panel-danger
-      div.panel-heading
-        h3.panel-title Change password
-      div.panel-body
-
-        // Change password
-        div.form-group
-          // Current password
-          label(for="currentPassword") Current Password
-          input(type="password" ng-model="edit.currentPassword" class="form-control" id="currentPassword")
+  form
+    div.col-md-12
+      div(class="alert alert-success" ng-if="edit.message") {{edit.message}}
+      div.well
+        h6.text-center Change Password
+        
+        //- // Change password
+        //- div.form-group
+        //-   // Current password
+        //-   label(for="currentPassword") Current Password
+        //-   input(type="password" ng-model="edit.currentPassword" class="form-control" id="currentPassword")
           
         // New password
         div.form-group
@@ -24,5 +24,5 @@ div.container-fluid
           input(type="password" ng-model="edit.confirmNewPassword" class="form-control" id="confirmNewPassword")
         
         // Save button
-        button(type="submit" class="btn btn-danger") Change
-      
+        button(type="submit" class="btn btn-danger" ng-click="edit.updatePassword()") Change
+  
