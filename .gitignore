@@ -2,3 +2,7 @@ node_modules
 npm-debug.log
 .DS_Store
 .sass-cache
+.env
+server/public/assets/js/*
+server/public/assets/css/*
+server/public/vendor/*
