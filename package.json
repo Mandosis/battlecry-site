@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Mandosis/battlecry-site#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "passport": "^0.3.2",
