@@ -27,7 +27,7 @@ router.get('/admin/*', function(req, res) {
 
 // App catchall for client side routing
 router.get('/*', function(req, res) {
-  res.render(path.join(__dirname, '../../views/app/app.jade'));
+  res.render(path.join(__dirname, '../../views/app/app.pug'));
 });
 
 module.exports = router;
