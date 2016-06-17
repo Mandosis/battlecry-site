@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var config = require('../modules/config');
@@ -13,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', views);
 
 // Start the server
-var server = app.listen(process.env.PORT || config.port, function() {
+var server = app.listen(process.env.PORT || config.port, () => {
   // Get the port number the server is currently running on.
-  var port = server.address().port;
+  let port = server.address().port;
   console.log('Listening on port ' + port + '. Press ctrl + c to stop');
 });
