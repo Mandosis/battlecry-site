@@ -28,23 +28,50 @@ gulp.task('copy', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src('./client/sass/**/*.scss')
-    .pipe(sass({
-      outputStyle: 'compressed'
-    }).on('error', sass.logError))
-    .pipe(gulp.dest('./server/public/assets/css'));
+  let compile = () => {
+    // Client
+    gulp.src('./src/client/sass/**/*.scss')
+      .pipe(concat('client.min.css'))
+      .pipe(sass({
+        outputStyle: 'compressed'
+      }).on('error', sass.logError))
+      .pipe(gulp.dest('./server/public/assets/css'));
+
+    // Admin
+    gulp.src('./src/admin/sass/**/*.scss')
+      .pipe(concat('admin.min.css'))
+      .pipe(sass({
+        outputStyle: 'compressed'
+      }).on('error', sass.logError))
+      .pipe(gulp.dest('./server/public/assets/css'));
+  }
+  return compile();
 });
 
 gulp.task('uglify', () => {
-  return gulp.src('./client/js/**/*.js')
-    .pipe(concat('client.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./server/public/assets/js'));
+  let compile = () => {
+    // Client
+    gulp.src('./src/client/js/**/*.js')
+      .pipe(concat('client.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('./server/public/assets/js'));
+
+    // Admin
+    gulp.src('./src/admin/js/**/*.js')
+      .pipe(concat('admin.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('./server/public/assets/js'));
+  }
+
+  return compile();
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./client/sass/**/*.scss', ['sass']);
-  gulp.watch('./client/js/**/*.js', ['uglify']);
+  gulp.watch('./src/client/sass/**/*.scss', ['sass']);
+  gulp.watch('./src/admin/sass/**/*.scss', ['sass']);
+
+  gulp.watch('./src/client/js/**/*.js', ['uglify']);
+  gulp.watch('./src/admin/js/**/*.js', ['uglify']);
 });
 
 gulp.task('start', () => {
@@ -52,7 +79,7 @@ gulp.task('start', () => {
     script: 'server/server.js',
     ext: 'js',
     ignore: [
-      'client/',
+      'src/',
       'server/public/'
     ]
   }).on('restart', () => {
