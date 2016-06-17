@@ -6,10 +6,12 @@
 * RethinkDB (v2.3)
 
 ### Instructions
-* Clone the repository
-* Inside the directory for the project, run `npm install` in a command line
-* Start the application by using `npm start` which will start the project at localhost:3000. If port 3000 is already in use, a new port can be specified by creating a .env file with the following contents:
+1. `git clone https://github.com/Mandosis/battlecry-site.git`
 
-```
-PORT [Your port number here]
-```
+2. `cd battlecry-site`
+
+3. `nano config.json` or `vim config.json` and change settings as needed.
+
+4. `npm install`
+
+5. `npm start`
