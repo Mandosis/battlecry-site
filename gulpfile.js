@@ -11,6 +11,7 @@ gulp.task('copy', () => {
   let vendors = [
     'angular/angular.min.js',
     'angular/angular.min.js.map',
+    'angular-ui-router/release/angular-ui-router.min.js',
     'bootstrap/dist/css/bootstrap.min.css',
     'bootstrap/dist/css/bootstrap.min.css.map',
   ];
@@ -19,7 +20,15 @@ gulp.task('copy', () => {
     // Append directory of node_modules and add to locations
     for (let it = 0; it < vendors.length; it++) {
       let file = './node_modules/' + vendors[it];
-      let dest = './server/public/vendor/' + vendors[it];
+      let tokens = vendors[it].split('/');
+
+      // Remove the last value
+      tokens.pop();
+
+      // Join the array to a string
+      let path = tokens.join('/');
+
+      let dest = './server/public/vendor/' + path;
       gulp.src(file).pipe(gulp.dest(dest));
     }
   }
