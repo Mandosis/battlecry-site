@@ -4,6 +4,11 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var nodemon = require('gulp-nodemon');
+var notify = require('gulp-notify');
+var rename = require('gulp-rename');
+var moment = require('moment');
+var through = require('through2');
+var fs = require('fs');
 
 gulp.task('copy', () => {
 
@@ -57,30 +62,45 @@ gulp.task('sass', () => {
   return compile();
 });
 
-gulp.task('uglify', () => {
-  let compile = () => {
-    // Client
-    gulp.src('./src/client/js/**/*.js')
-      .pipe(concat('client.min.js'))
+gulp.task('uglify-client', () => {
+    return gulp.src('./src/client/js/**/*.js')
       .pipe(uglify())
-      .pipe(gulp.dest('./server/public/assets/js'));
+      .on('error', notify.onError("Error: <%= error.message %>"))
+      .pipe(concat('client'))
+      .pipe(through.obj((file, enc, cb) => {
+        let contents = file.contents.toString();
+        let oneLine = contents.split('\n').join('');
 
-    // Admin
-    gulp.src('./src/admin/js/**/*.js')
-      .pipe(concat('admin.min.js'))
-      .pipe(uglify())
-      .pipe(gulp.dest('./server/public/assets/js'));
-  }
+        file.contents = new Buffer(oneLine)
 
-  return compile();
+        cb(null, file);
+      }))
+      .pipe(rename({ extname: ".min.js" }))
+      .pipe(gulp.dest('./server/public/assets/js'))
+});
+
+gulp.task('uglify-admin', () => {
+  return gulp.src('./src/admin/js/**/*.js')
+    .pipe(uglify())
+    .on('error', notify.onError("Error: <%= error.message %>"))
+    .pipe(concat('admin'))
+    .pipe(through.obj((file, enc, cb) => {
+      let contents = file.contents.toString();
+      let oneLine = contents.split('\n').join('');
+
+      file.contents = new Buffer(oneLine)
+
+      cb(null, file);
+    }))
+    .pipe(rename({ extname: ".min.js" }))
+    .pipe(gulp.dest('./server/public/assets/js'))
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./src/client/sass/**/*.scss', ['sass']);
-  gulp.watch('./src/admin/sass/**/*.scss', ['sass']);
+  gulp.watch('./src/**/*.scss', ['sass']);
 
-  gulp.watch('./src/client/js/**/*.js', ['uglify']);
-  gulp.watch('./src/admin/js/**/*.js', ['uglify']);
+  gulp.watch('./src/client/**/*.js', ['uglify-client']);
+  gulp.watch('./src/admin/**/*.js', ['uglify-admin']);
 });
 
 gulp.task('start', () => {
@@ -91,9 +111,10 @@ gulp.task('start', () => {
       'src/',
       'server/public/'
     ]
-  }).on('restart', () => {
-    // console.log('Server restarted');
-  });
+  }).on('crash', () => {
+    gulp.src('./server/server.js')
+      .pipe(notify('Server crashed (' + moment().format('MMM Do h:mm:ss A') + ')'))
+  })
 })
 
-gulp.task('default', ['copy', 'sass', 'uglify', 'watch', 'start']);
+gulp.task('default', ['copy', 'sass', 'uglify-client', 'uglify-admin', 'watch', 'start']);
