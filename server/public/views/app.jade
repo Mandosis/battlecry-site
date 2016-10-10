@@ -29,9 +29,9 @@ html(ng-app="battlecryApp")
           li
             a(href="/about") About
             
-        ul(class="nav navbar-nav navbar-right" ng-if="!app.user.data.username")
-          li
-            a(href="/login") Login
+        a(href="/login" class="pull-right" ng-if="!app.user.data.username")
+          button(class="btn btn-default navbar-btn") Sign in
+          
         ul(class="nav navbar-nav navbar-right" ng-if="app.user.data.username")
           li
             a(href="/profile") {{app.user.data.username}}

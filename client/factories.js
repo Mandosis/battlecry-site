@@ -109,35 +109,6 @@ app.factory('UserService', ['$http', function($http) {
     }
   }
 
-
-
-
-  // Edit User
-  var edit = function(newPassword, confirmNewPassword, callback) {
-
-
-    if (newPassword == confirmNewPassword) {
-      var edits = {
-        password: newPassword
-      };
-
-      $http.post('/app/v1/editProfile', edits).then(function(response) {
-        callback(true);
-
-      }, function(response) {
-        callback(false);
-      });
-
-    } else {
-      callback(false);
-    }
-
-
-  }
-
-
-
-
   // Logout
   var logout = function(callback) {
     $http.get('/app/v1/logout').then(function(request) {
@@ -164,7 +135,6 @@ app.factory('UserService', ['$http', function($http) {
     login: login,
     logout: logout,
     register: register,
-    edit: edit,
     isAuthenticated: isAuthenticated
   }
 }]);

@@ -157,9 +157,7 @@ app.controller('LoginController', ['HeadService', 'cfpLoadingBar', '$timeout', '
 
   // Check if user is logged in
   UserService.isAuthenticated(function() {
-    if (status == true) {
-      $location.path('/');
-    }
+
   });
 
 
@@ -326,17 +324,6 @@ app.controller('PlayerController', ['HeadService', 'UserService', '$http', 'cfpL
   // Get stats info
   ProfileService.stats($routeParams.username);
 
-  // Kills/Deaths Chart
-  vm.kdLabels = ["Kills", "Deaths"];
-  vm.kdOptions = {
-  }
-
-  // Win/Loss Chart
-  vm.wlLabels = ["Won", "Lost"];
-  vm.wlOptions = {
-  }
-
-
   vm.startLoad = function() {
     cfpLoadingBar.start();
   };
@@ -415,9 +402,6 @@ app.controller('ProfileController', ['HeadService', 'UserService', '$http', 'cfp
 app.controller('EditController', ['HeadService', 'UserService', '$http', 'cfpLoadingBar', '$timeout', 'ProfileService', '$routeParams', '$templateCache', function(HeadService, UserService, $http, cfpLoadingBar, $timeout, ProfileService, $routeParams, $templateCache) {
   var vm = this;
   vm.data = ProfileService.data;
-  vm.currentPassword = '';
-  vm.newPassword = '';
-  vm.confirmNewPassword = '';
 
   // Remove cached page
   $templateCache.removeAll();
@@ -432,51 +416,10 @@ app.controller('EditController', ['HeadService', 'UserService', '$http', 'cfpLoa
 
     // Get profile info
     ProfileService.profile(data.user.username);
-  });
-
-  vm.updatePassword = function() {
-    // FAKE IT
-    vm.message = 'Password updated';
-
-    // UserService.edit(newPassword, confirmNewPassword, function(success) {
-    //   if (success == true) {
-    //     vm.message = 'Password updated successfully'
-    //   } else {
-    //     vm.error = 'Passwords do not match'
-    //   }
-    // })
-  }
-
-  vm.startLoad = function() {
-    cfpLoadingBar.start();
-  };
-
-  vm.completeLoad = function() {
-    cfpLoadingBar.complete();
-  }
-
-  // fake the initial load so first time users can see the bar right away:
-  vm.startLoad();
-  vm.fakeIntro = true;
-  $timeout(function() {
-    vm.completeLoad();
-    vm.fakeIntro = false;
-  }, 1250);
-}]);
-
-/*******************************************************************************
-                                    About
-*******************************************************************************/
-app.controller('AboutController', ['HeadService', 'UserService', '$http', 'cfpLoadingBar', '$timeout', 'ProfileService', '$routeParams', '$templateCache', function(HeadService, UserService, $http, cfpLoadingBar, $timeout, ProfileService, $routeParams, $templateCache) {
-  var vm = this;
 
 
-  // Set page title
-  HeadService.title('About');
-
-  // Check if user is logged in
-  UserService.isAuthenticated(function() {
-
+    // Fetch stats
+    ProfileService.stats(data.user.username);
   });
 
   vm.startLoad = function() {

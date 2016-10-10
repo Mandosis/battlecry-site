@@ -281,42 +281,4 @@ router.get('/community/search/:username', function(req, res) {
   });
 });
 
-/*******************************************************************************
-                                  Edit Profile
-*******************************************************************************/
-router.get('/profile/edit', function(req, res) {
-  if(req.isAuthenticated()) {
-    var options = {
-      url: 'http://' + config.api + '/v1/players/' + req.user.username,
-      headers: {
-        'x-access-token': config.token
-      },
-      form: {
-        password: req.body.newPassword
-      }
-    };
-    if(req.body.newPassword == req.body.confirmNewPassword) {
-      request.patch(options, function(error, response, body) {
-        if(err) {
-          console.log('err');
-          res.status(500).json({
-            success: 'false',
-            message: 'Internal error.'
-          });
-        } else if (response.statusCode < 300) {
-          res.status(201).json({
-            success: true,
-            message: 'Password updated.'
-          });
-        }
-      });
-    } else {
-      res.status(401).json({
-        success: false,
-        message: 'Passwords are different'
-      });
-    }
-  }
-});
-
 module.exports = router;
