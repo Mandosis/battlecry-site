@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('../modules/config');
 
 var app = express();
 
