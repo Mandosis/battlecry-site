@@ -1,0 +1,43 @@
+doctype HTML
+html(ng-app="battlecryApp")
+  head(ng-controller="HeadController as head")
+    title {{head.tags.title}}
+    base(href="/")
+    script(src="vendor/angular/angular.min.js")
+    script(src="vendor/angular-route/angular-route.min.js")
+    script(src="vendor/angular-loading-bar/build/loading-bar.min.js")
+    script(src="vendor/chart.js/dist/Chart.min.js")
+    script(src="vendor/moment/min/moment.min.js")
+    script(src='vendor/angular-chart.js/dist/angular-chart.min.js')
+    script(src="assets/js/client.min.js")
+    link(rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="vendor/angular-loading-bar/build/loading-bar.min.css")
+    link(rel="stylesheet" href="assets/css/style.min.css")
+  body(ng-controller="AppController as app")
+    nav(class="navbar navbar-default")
+      div.container-fluid
+        // Logo
+        a(class="navbar-brand" href="/")
+          img(src="/assets/images/logo.png" height="70px")
+        
+        // Navigation Links
+        ul(class="nav navbar-nav")
+          li
+            a(href="/") Home
+          li
+            a(href="/community") Community
+          li
+            a(href="/about") About
+            
+        ul(class="nav navbar-nav navbar-right" ng-if="!app.user.data.username")
+          li
+            a(href="/login") Login
+        ul(class="nav navbar-nav navbar-right" ng-if="app.user.data.username")
+          li
+            a(href="/profile") {{app.user.data.username}}
+          li
+            a(href="/logout") Logout
+                
+    // Appliction view
+    main
+      section(ng-view)

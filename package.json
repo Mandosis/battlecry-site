@@ -1,25 +1,37 @@
 {
   "name": "battlecry-site",
   "version": "1.0.0",
-  "description": "Website for the Star Wars: Battlecry indie game built with the fans and community in mind",
+  "description": "Battlecry website",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mandosis/battlecry-site.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "author": "Chris Rabuse",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Mandosis/battlecry-site/issues"
-  },
-  "homepage": "https://github.com/Mandosis/battlecry-site#readme",
   "dependencies": {
+    "angular": "^1.5.5",
+    "angular-chart.js": "^1.0.0-alpha6",
+    "angular-loading-bar": "^0.9.0",
+    "angular-route": "^1.5.5",
+    "body-parser": "^1.15.1",
+    "bootstrap": "^3.3.6",
+    "chart.js": "^2.1.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "moment": "^2.13.0",
+    "morgan": "^1.7.0",
+    "multer": "^1.1.0",
     "passport": "^0.3.2",
-    "thinky": "^2.3.2"
+    "passport-local": "^1.0.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
   }
 }
