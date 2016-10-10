@@ -17,14 +17,10 @@ router.get('/:view/partial/:partial', function(req, res) {
   });
 });
 
-router.get('/admin', function(req, res) {
-  res.render(path.join(__dirname, '../../views/admin/app.pug'));
-});
-
 /*************************       KEEP AT BOTTOM       *************************/
 
 // Admin catchall for client side routing
-router.get('/admin/*', function(req, res) {
+router.get('/admin/?*', function(req, res) {
   res.render(path.join(__dirname, '../../views/admin/app.pug'));
 });
 
