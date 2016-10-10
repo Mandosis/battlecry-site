@@ -5,6 +5,10 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var nodemon = require('gulp-nodemon');
 
+gulp.task('default', () => {
+  console.log('Gulping!');
+});
+
 gulp.task('copy', () => {
 
   // List of files to copy
@@ -56,7 +60,7 @@ gulp.task('start', () => {
       'server/public/'
     ]
   }).on('restart', () => {
-    // console.log('Server restarted');
+    console.log('Server restarted');
   });
 })
 
